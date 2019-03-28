@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 
 // ===================  Personal  ==================================
 const characterRouter = require('./routes/api/characters');
+const itemRouter = require('./routes/api/items');
 
 // ===================  Initialize Router Variables  ==================================
 // Initialize mongoose here.
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // --------------------  Routing  ---------------------
 app.use('/api/characters', characterRouter);
+app.use('/api/items', itemRouter);
 
 // ===================  Start Server  ==================================
 const PORT = process.env.PORT || 4000;

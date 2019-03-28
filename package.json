@@ -19,6 +19,7 @@
   "homepage": "https://github.com/ScotteRoberts/fire-emblem-team-builder#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "csvtojson": "^2.0.8",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "fire-emblem-heroes-stats": "^0.15.2",
