@@ -1,0 +1,31 @@
+{
+  "name": "fire-emblem-team-builder",
+  "version": "0.1.0",
+  "description": "Fire Emblem Team Builder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ScotteRoberts/fire-emblem-team-builder.git"
+  },
+  "author": "Scott Roberts",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ScotteRoberts/fire-emblem-team-builder/issues"
+  },
+  "homepage": "https://github.com/ScotteRoberts/fire-emblem-team-builder#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "fire-emblem-heroes-stats": "^0.15.2",
+    "lowdb": "^1.0.0",
+    "mongoose": "^5.4.20"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}

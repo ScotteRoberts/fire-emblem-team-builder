@@ -1,2 +1,3 @@
-# fire-emblem-team-builder
-Team builder application based on the fire emblem series
+# Fire Emblem Team Builder
+
+Team builder application based on the Fire Emblem series
