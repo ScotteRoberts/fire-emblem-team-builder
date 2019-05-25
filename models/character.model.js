@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const schema = mongoose.Schema({
-  name: String,
+  name: { type: String, require: true },
+  origin: { type: String, require: true },
   title: String,
-  origin: String,
 });
 
 const Character = mongoose.model('character', schema);
