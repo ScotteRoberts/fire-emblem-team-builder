@@ -20,6 +20,12 @@ const userSchema = new Schema({
       ref: 'category',
     },
   ],
+  createdTeams: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'team',
+    },
+  ],
 });
 
 const user = mongoose.model('user', userSchema);

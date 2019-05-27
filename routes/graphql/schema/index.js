@@ -1,43 +1,76 @@
 const { buildSchema } = require('graphql');
 
 module.exports = buildSchema(`
-      type Category {
-        _id: ID!
-        name: String!
-        description: String
-        creator: User!
-      }
-      
-      type User {
-        _id: ID!
-        email: String!
-        password: String
-        displayName: String
-        createdCategories: [Category!]
-      }
-      
-      input CategoryInput {
-        name: String!
-        description: String
-      }
+  type Character {
+    _id: ID!
+    name: String!
+    origin: String
+    title: String
+  }
 
-      input UserInput {
-        email: String!
-        password: String!
-        displayName: String
-      }
+  type Team {
+    _id: ID!
+    name: String!
+    roster: [Character!]!
+    creator: User!
+    categories: [Category!]
+    createdAt: String!
+    updatedAt: String!
+  }  
 
-      type RootQuery {
-        categories: [Category!]!
-      }
+  type Category {
+    _id: ID!
+    name: String!
+    description: String
+    creator: User!
+  }
+  
+  type User {
+    _id: ID!
+    email: String!
+    password: String!
+    displayName: String
+    createdCategories: [Category!]
+    createdTeams: [Team!]
+  }
 
-      type RootMutation {
-        createCategory(categoryInput: CategoryInput): Category
-        createUser(userInput: UserInput): User
-      }
+  input CharacterInput {
+    name: String!
+    origin: String
+    title: String
+  }
 
-      schema {
-        query: RootQuery
-        mutation: RootMutation
-      }
-    `);
+  input TeamInput {
+    name: String!
+  }
+  
+  input CategoryInput {
+    name: String!
+    description: String
+  }
+
+  input UserInput {
+    email: String!
+    password: String!
+    displayName: String
+  }
+
+  type RootQuery {
+    characters: [Character!]!
+    teams: [Team!]!
+    categories: [Category!]!
+  }
+
+  type RootMutation {
+    createCategory(categoryInput: CategoryInput): Category
+    deleteCategory(categoryId: ID!): Category
+    createUser(userInput: UserInput): User
+    createTeam(teamInput: TeamInput): Team
+    deleteTeam(teamId: ID!): Team
+  }
+
+  schema {
+    query: RootQuery
+    mutation: RootMutation
+  }
+`);
