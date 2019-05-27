@@ -10,6 +10,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 // ===================  Personal  ==================================
+const isAuth = require('./middleware/isAuth');
 const graphQLSchema = require('./routes/graphql/schema');
 const graphQLResolvers = require('./routes/graphql/resolvers');
 const characterRouter = require('./routes/api/characters');
@@ -27,6 +28,8 @@ const PORT = process.env.PORT || 4000;
 
 // HTTP request security
 app.use(cors());
+// Authentication security
+app.use(isAuth);
 // For json body reading
 app.use(bodyParser.json());
 // For url form data

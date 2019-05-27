@@ -34,6 +34,12 @@ module.exports = buildSchema(`
     createdTeams: [Team!]
   }
 
+  type AuthData {
+    userId: ID!
+    token: String!
+    tokenExpiration: Int!
+  }
+
   input CharacterInput {
     name: String!
     origin: String
@@ -59,6 +65,7 @@ module.exports = buildSchema(`
     characters: [Character!]!
     teams: [Team!]!
     categories: [Category!]!
+    login(email: String!, password: String!): AuthData!
   }
 
   type RootMutation {

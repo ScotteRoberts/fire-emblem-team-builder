@@ -5,7 +5,10 @@ const { transformCategory } = require('./merge.resolver');
 
 // ---------------------- Resolvers -----------------------
 module.exports = {
-  categories: async () => {
+  categories: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated');
+    }
     try {
       const categories = await Category.find();
       return categories.map(category => transformCategory(category));
@@ -13,18 +16,21 @@ module.exports = {
       throw err;
     }
   },
-  createCategory: async args => {
+  createCategory: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated');
+    }
     const category = new Category({
       name: args.categoryInput.name,
       description: args.categoryInput.description,
-      creator: '5ceb322e95aa236e3be751d0',
+      creator: req.userId,
     });
     let createdCategory;
     try {
       const result = await category.save();
       createdCategory = transformCategory(result);
 
-      const creator = await User.findById('5ceb322e95aa236e3be751d0');
+      const creator = await User.findById(req.userId);
       if (!creator) {
         throw new Error('User was not found.');
       }

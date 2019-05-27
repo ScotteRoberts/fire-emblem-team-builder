@@ -6,7 +6,10 @@ const { transformTeam } = require('./merge.resolver');
 // ---------------------- Resolvers -----------------------
 
 module.exports = {
-  teams: async () => {
+  teams: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated');
+    }
     try {
       const teams = await Team.find();
       return teams.map(team => transformTeam(team));
@@ -15,17 +18,20 @@ module.exports = {
     }
   },
 
-  createTeam: async args => {
+  createTeam: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated');
+    }
     const team = new Team({
       name: args.teamInput.name,
       roster: ['5c9c39d18e16c12acde82b91', '5c9c39d18e16c12acde82bb7', '5c9c39d18e16c12acde82b95'],
-      creator: '5ceb322e95aa236e3be751d0',
+      creator: req.userId,
     });
     let createdTeam;
     try {
       const result = await team.save();
       createdTeam = transformTeam(result);
-      const creator = await User.findById('5ceb322e95aa236e3be751d0');
+      const creator = await User.findById(req.userId);
 
       if (!creator) {
         throw new Error('User was not found.');
