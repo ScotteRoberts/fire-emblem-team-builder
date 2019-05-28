@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 router.post('/seed', async (req, res) => {
   try {
     await Character.deleteMany({});
-    const characters = await seeder.insertAllCharacters();
+    const characters = await seeder.getAssets();
     return res.status(201).json({ message: 'All Characters Seeded', characters });
   } catch (err) {
     return res.status(500).json(err);
